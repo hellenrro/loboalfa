@@ -15,6 +15,13 @@ const routes: RouteRecordRaw[] = [
       { path: '/index', component: () => import('pages/Adoption/Index.vue'), name: 'pets.index' },
     ],
   },
+  {
+    path: '/register',
+    component: () => import('layouts/RegisterLayout.vue'),
+    children: [
+      { path: '/register', component: () => import('pages/Register/Register.vue'), name: 'register.index' },
+    ],
+  },
   // Always leave this as last one, but you can also remove it
   {
     path: '/:catchAll(.*)*',

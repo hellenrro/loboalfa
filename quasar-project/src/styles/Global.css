@@ -1,0 +1,26 @@
+body {
+  margin: 0;
+  overflow: hidden;
+  background-color: #EEEABD;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(0,0,0,0.1) white;
+}
+
+*::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+*::-webkit-scrollbar-track {
+  -webkit-box-shadow: none;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: rgba(0,0,0,0.1);
+}

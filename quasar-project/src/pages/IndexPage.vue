@@ -1,7 +1,7 @@
 <template>
-  <q-page class="row items-center justify-evenly">
+  <div class="page-under-construction">
    <span>Pagina em contrução</span>
-  </q-page>
+  </div>
 </template>
 
 <script lang="ts">
@@ -13,3 +13,12 @@ export default defineComponent({
   }
 });
 </script>
+
+<style>
+.page-under-construction {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 500px;
+}
+</style>

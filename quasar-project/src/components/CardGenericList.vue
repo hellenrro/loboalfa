@@ -1,29 +1,76 @@
 <template>
-  <div class="card-generic q-pa-md" style="background-color: #d3d3d3">
+  <div class="card-generic">
     <div>
-      <q-img :src="url" width="80px" class="card-image" alt="Descrição da imagem"/>
+      <q-carousel
+      swipeable
+      animated
+      v-model="slide"
+      ref="carousel"
+      infinite
+      height="130px"
+      style="border-radius: 35px 35px 0 0;"
+    >
+      <!-- <div v-for="(url, index) in urls.value" :key="index">
+        <q-carousel-slide :name="index" :img-src="url" />
+      </div> -->
+      <q-carousel-slide :name="0" img-src="../statics/Cachorro-Png.webp" />
+      <q-carousel-slide :name="1" img-src="../statics/Cachorro-Pequeno-Png.webp" />
+    </q-carousel>
     </div>
-    <div class="name">{{ name }}</div>
-    <div class="description">{{ description }}</div>
+    <div class="name">
+      <q-btn
+        class="btn-arrow"
+        flat icon="arrow_left"
+        @click="$refs.carousel.previous()"
+      />
+      {{ name }}
+      <q-btn
+        class="btn-arrow"
+        flat icon="arrow_right"
+        @click="$refs.carousel.next()"
+      />
+    </div>
+
+    <div>
+      <span>Idade: 2 anos</span>
+    </div>
+
+    <div>
+      <span>Porte: médio</span>
+    </div>
+
+    <div class="description">
+      {{ description.length > 165 ? description.substr(0, 165).concat('...') : description }}
+      <q-tooltip anchor="top end" self="top middle" max-width="300px">
+        <div class="description">
+          {{ description }}
+        </div>
+      </q-tooltip>
+    </div>
   </div>
 </template>
 
 <script>
-import {computed, onBeforeMount, ref} from "vue";
+import {computed, ref} from 'vue';
 
 export default {
   props: {
-    imageSrc: String,
+    imageSrc: Array(String),
     name: String,
     description: String,
   },
   setup (props) {
-    const url = computed(() => {
-      return `http://localhost:8989/storage/pets/${props.imageSrc}`
-    })
+    const urls = computed(() => {
+      const urlsAux = [];
+      props.imageSrc.map(img => {
+        urlsAux.push(img);
+      });
+      return urlsAux;
+    });
 
     return {
-      url
+      urls,
+      slide: ref(0),
     };
   }
 };
@@ -31,23 +78,28 @@ export default {
 
 <style scoped>
 .card-generic {
-  text-align: center;
+  height: 370px;
   padding: 20px;
-  border-radius: 5px;
+  margin: 15px;
+  width: 300px;
+  background-color: #fff;
+  border-radius: 50px;
+  box-shadow:  5px 5px 5px #bebebe,
+             -5px -5px 5px #ffffff;
 }
-
-.card-image {
-  padding: 10px;
-  max-width: 100%;
-  height: auto;
-}
-
 .name {
+  font-size: 18px;
   font-weight: bold;
   margin: 10px 0;
+  text-align: center;
 }
-
 .description {
   margin: 10px 0;
+  height: fit-content;
+  word-break: break-all;
+}
+
+.btn-arrow {
+  border-radius: 50px;
 }
 </style>
