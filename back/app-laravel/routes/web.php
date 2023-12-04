@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AnimalController;
 
@@ -13,9 +14,16 @@ use App\Http\Controllers\AnimalController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+Route::post('/user/register', AuthController::class . '@register');
+Route::post('/user/login', AuthController::class . '@login');
+Route::post('/user/logout', AuthController::class . '@logout');
 
+
+Route::middleware('auth')->group(function () {
+    Route::post('/create', AnimalController::class . '@store');
+});
 Route::get('/list', AnimalController::class . '@index');
-Route::post('/create', AnimalController::class . '@store');
 Route::delete('/delete/{id}', AnimalController::class . '@destroy');
 Route::put('/edit/{id}', AnimalController::class . '@edit');
+
 

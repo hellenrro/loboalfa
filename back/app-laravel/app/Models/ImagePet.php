@@ -8,9 +8,9 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
-class Pets extends Model
+class ImagePet extends Model
 {
-    protected $table = 'pets';
+    protected $table = 'images_pets';
 
     /**
      * The attributes that are mass assignable.
@@ -19,14 +19,7 @@ class Pets extends Model
      */
     protected $fillable = [
         'name',
-        'description',
-        'highlight',
-        'img'
+        'id_pet'
     ];
-
-    public function imgPets()
-    {
-        return $this->hasMany(ImagePet::class, 'id_pet');
-    }
 
 }
