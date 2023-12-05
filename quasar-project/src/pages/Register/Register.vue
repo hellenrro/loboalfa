@@ -1,6 +1,12 @@
 <template>
   <div class="area">
-    <div class="image-area">
+    <div v-if="loading" class="loading" style="justify-content: center">
+      <q-spinner-facebook color="blue-10" style="justify-content: center" size="10em"></q-spinner-facebook>
+    </div>
+    <div>
+
+    </div>
+    <div v-if="!loading" class="image-area">
       <!-- <q-file multiple="" borderless v-model="form.file" color="blue-10" accept="image/" :rules="[
         val => val != null || 'Imagem obrigatória',
       ]">
@@ -33,7 +39,7 @@
         </template>
       </q-uploader>
     </div>
-    <div class="form-area">
+    <div v-if="!loading" class="form-area">
       <q-form class="input" @submit="onSubmit" @reset="onReset" ref="myForm">
         <q-input class="input" outlined v-model="form.name" color="blue-10" placeholder="Digite o nome" hint="Nome"
           :rules="[
@@ -85,6 +91,7 @@ export default defineComponent({
         size: '',
         files: [],
       },
+      loading: false,
       sizeOptions: [
         { label: 'Pequeno', value: 'pequeno' },
         { label: 'Médio', value: 'médio' },
@@ -94,6 +101,7 @@ export default defineComponent({
   },
   methods: {
     onSubmit() {
+      this.loading = true;
       axios.post('http://localhost:8989/create', {
         name: this.form.name,
         description: this.form.description,
@@ -101,6 +109,8 @@ export default defineComponent({
         age: this.form.age,
         size: this.form.size,
         img: this.form.files.map((item) => item),
+      }).then(() => {
+        this.loading = false;
       });
 
       this.onReset()
