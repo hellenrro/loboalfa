@@ -14,11 +14,13 @@ export default defineComponent({
 });
 </script>
 
-<style>
+<style scoped>
 .page-under-construction {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 500px;
+  font-size: 18px;
+  font-weight: bold;
+  height: 30em;
 }
 </style>

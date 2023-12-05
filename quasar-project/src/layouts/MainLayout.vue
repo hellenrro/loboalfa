@@ -1,62 +1,71 @@
 <template>
-  <q-layout>
+  <q-layout class="layout">
     <div class="centered-image q-pt-md">
 <!--      '../../../back/app-laravel/storage/app/public/pets/1699122368.png-->
 <!--      ../../../back/app-laravel/storage/app/public/pets/1699121483.png-->
 <!--      // ../statics/logo.png-->
       <q-img src="../statics/logo.png" width="200px"/>
     </div>
-    <div class="menu q-mt-sm">
-      <a href="#">Home</a>
-      <router-link :to="{ name: 'pets.index' }">Animais</router-link>
-      <a href="#">Contato</a>
+    <div class="menu">
+      <div class="a-area"><a class="a" href="#">Home</a></div>
+      <div class="a-area"><router-link class="a" :to="{ name: 'pets.index' }">Animais</router-link></div>
+      <div class="a-area"><a class="a" href="#">Contato</a></div>
     </div>
-
-    <q-footer class="footer">
-        <q-toolbar>
-          <q-toolbar-title>O Lobo Alfa</q-toolbar-title>
-        </q-toolbar>
-      </q-footer>
 
     <!-- Se desejar centralizar a imagem verticalmente, você pode usar flexbox na div .centered-image -->
     <!-- <div class="centered-image flex-center-v"> -->
 
-    <q-page-container>
-      <router-view />
-    </q-page-container>
+    <router-view />
+
+    <q-footer class="footer">
+      <q-toolbar>
+        <q-toolbar-title>O Lobo Alfa</q-toolbar-title>
+      </q-toolbar>
+    </q-footer>
   </q-layout>
 </template>
 
-<style>
+<style scoped>
 .centered-image {
   display: flex;
   justify-content: center;
   align-items: center;
 }
+
 .menu {
-  margin: 15px 100px;
+  margin: 0.938em 6.25em 0 6.25em;
   background-color: #00008b;
-  border-top: 6px solid #ffa500;
-  border-bottom: 6px solid #ffa500;
-  text-align: center;
-  padding: 20px;
+  border-top: 0.375em solid #ffa500;
+  border-bottom: 0.375em solid #ffa500;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  height: 4.5em;
 }
 
-.menu a {
+.a-area {
+  display: flex;
+  align-items: center;
+  height: 85%;
+}
+.a {
   color: white;
   text-decoration: none;
-  margin: 0 60px;
-  font-size: 18px;
+  font-size: 1.125em;
   font-weight: bold;
+  margin: 0 0.75em;
 }
 
 .footer {
   background: url(../assets/bgfooter.jpg) repeat-x;
-  height: 120px;
+  height: 10em;
+  width: 100%;
   text-align: center;
   color: #999999;
-  font-size: 14px;
+  font-size: 0.875em;
   font-weight: normal;
+  position: fixed;
+  bottom: 0;
 }
 </style>
 
