@@ -1,13 +1,6 @@
 <template>
   <div class="area">
     <div class="image-area">
-      <!-- <q-file multiple="" borderless v-model="form.file" color="blue-10" accept="image/" :rules="[
-        val => val != null || 'Imagem obrigatória',
-      ]">
-        <div>
-          <q-icon name="attach_file" />
-        </div>
-      </q-file> -->
       <q-uploader
         multiple
         class="input-file"
