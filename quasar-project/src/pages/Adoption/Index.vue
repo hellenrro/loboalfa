@@ -57,7 +57,7 @@
       </div>
     </div>
     <div class="body-area">
-      <div class="cards-area">
+      <div class="cards-area" style="margin-right: 2.45rem">
         <CardGenericList v-for="(item, index) in data" :key="index" :name="item.name" :color="item.color"
           :size="item.size" :age="item.age" :description="item.description" :id="item.id" :images-src="item.img" />
       </div>

@@ -54,9 +54,9 @@ export default {
 <style scoped>
 .card-generic {
   height: 22em;
-  width: 18.75em;
+  width: 17.80em;
   min-height: 22em;
-  min-width: 18.75em;
+  /*min-width: 18.75em;*/
   padding: 1.25em;
   margin: 0.938em;
   background-color: #fff;
