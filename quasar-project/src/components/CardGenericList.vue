@@ -23,7 +23,7 @@
     </div>
 
     <div>
-      <span><span class="bold">Cor</span>: {{ cor }}</span>
+      <span><span class="bold">Cor</span>: {{ color }}</span>
     </div>
 
     <div class="description">
