@@ -1,11 +1,9 @@
 <template>
   <div class="card-generic">
     <div>
-      <q-carousel swipeable animated v-model="slide" ref="carousel" infinite height="8.125em">
-        <q-carousel-slide v-for="(url, index) in imagesSrc" :key="index" :name="index"
-          :img-src="`http://localhost:8989/storage/pets/${url}`" />
-        <q-carousel-slide :name="0" img-src="../statics/Cachorro-Png.webp" />
-        <q-carousel-slide :name="1" img-src="../statics/Cachorro-Pequeno-Png.webp" />
+      <q-carousel swipeable animated :v-model="slide" ref="carousel" infinite height="8.125em">
+        <q-carousel-slide v-for="(url, index) in imagesSrc" :key="index" :name="1"
+          img-src="https://adimax.com.br/wp-content/uploads/2022/05/cuidados-filhote-de-cachorro.jpg" />
       </q-carousel>
     </div>
     <div class="name">
@@ -38,6 +36,8 @@
 </template>
 
 <script>
+import { ref } from 'vue';
+
 export default {
   props: {
     name: String,
@@ -48,6 +48,11 @@ export default {
     id: Number,
     imagesSrc: Array(String),
   },
+  setup() {
+    return {
+      slide: ref(1),
+    }
+  }
 };
 </script>
 

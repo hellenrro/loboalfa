@@ -4,7 +4,6 @@
   </div>
   <div v-else>
     <div class="title-area">
-      <span class="title">Animais para a adoção</span>
       <div class="filter-area">
         <q-select filled v-model="modelSelectAge" :options="optionsSelectAge" label="Idade" emit-value map-options
           clearable class="select" color="blue-10" @update:modelValue="onFilterAge" @clear="onClearFilterAge">
@@ -59,7 +58,7 @@
     <div class="body-area">
       <div class="cards-area">
         <CardGenericList v-for="(item, index) in data" :key="index" :name="item.name" :color="item.color"
-          :size="item.size" :age="item.age" :description="item.description" :id="item.id" :images-src="item.img" />
+          :size="item.size" :age="item.age" :description="item.description" :id="item.id" :images-src="''" />
       </div>
     </div>
   </div>
@@ -96,10 +95,11 @@ export default defineComponent({
     let optionsSelectColor: Ioptions[] = [];
 
     const getData = async () => {
-      loading.value = true;
-      const response = await axios.get('http://localhost:8989/list');
-      loading.value = false;
-      data.value = response.data.data;
+      // loading.value = true;
+      // const response = await axios.get('http://localhost:8989/list');
+      // loading.value = false;
+      // data.value = response.data.data;
+      data.value = [{'name':'teste','color':'preto','size':'pequeno','age':12,'description':'companheiro e brincalh\u00e3o','id':19,'img':[]},{'name':'teste','color':'preto','size':'pequeno','age':12,'description':'companheiro e brincalh\u00e3o','id':20,'img':[]},{'name':'teste','color':'preto','size':'pequeno','age':12,'description':'companheiro e brincalh\u00e3o','id':21,'img':[]},{'name':'teste','color':'preto','size':'pequeno','age':12,'description':'companheiro e brincalh\u00e3o','id':22,'img':[]},{'name':'teste','color':'preto','size':'pequeno','age':12,'description':'companheiro e brincalh\u00e3o','id':23,'img':['1701610734_shepherd-dog-puppy-png-0000060668-800.jpeg','1701610735_Cachorro-com-frio-3.webp']},{'name':'teste','color':'preto','size':'pequeno','age':12,'description':'companheiro e brincalh\u00e3o','id':24,'img':['1701610840.jpeg','1701610840.webp']}]
 
       optionsSelectAge = _.uniqWith(data.value.map((item) => {
         return {
@@ -228,11 +228,11 @@ export default defineComponent({
 }
 
 .title-area {
-  margin: 0 6.25em;
+  margin-left: 5.25em;
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: space-between;
+  justify-content: start;
   padding: 1.25em 0;
 }
 
