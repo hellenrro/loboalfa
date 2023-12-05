@@ -8,7 +8,17 @@
           <q-icon name="attach_file" />
         </div>
       </q-file> -->
-      <q-uploader multiple class="input-file" accept="image/" @added="onUpload" @removed="onUpload">
+      <q-uploader
+        multiple
+        class="input-file"
+        accept="image/"
+        @added="(file) => {
+          form.files.push(file[0]);
+        }"
+        @removed="(file) => {
+          form.files = form.files.filter((item) => item.__key !== file[0].__key);
+        }"
+      >
         <template v-slot:header="scope">
           <div class="row no-wrap items-center q-pa-sm q-gutter-xs title-uploader">
             <q-spinner v-if="scope.isUploading" class="q-uploader__spinner"></q-spinner>
@@ -73,31 +83,26 @@ export default defineComponent({
         color: '',
         age: null,
         size: '',
-        file: undefined,
+        files: [],
       },
       sizeOptions: [
-        { label: 'Pequeno', value: 'p' },
-        { label: 'Médio', value: 'm' },
-        { label: 'Grande', value: 'g' }
+        { label: 'Pequeno', value: 'pequeno' },
+        { label: 'Médio', value: 'médio' },
+        { label: 'Grande', value: 'grande' }
       ],
     }
   },
   methods: {
     onSubmit() {
-      console.log(this.form);
-
       axios.post('http://localhost:8989/create', {
         name: this.form.name,
         description: this.form.description,
-      }).then(response => {
-        console.log(response.data);
+        color: this.form.color,
+        age: this.form.age,
+        size: this.form.size,
+        img: this.form.files.map((item) => item),
       });
 
-      this.$q.notify({
-        message: 'Animal cadastrado com sucesso',
-        color: 'positive',
-        icon: 'check_circle_outline'
-      })
       this.onReset()
     },
     async onReset() {
@@ -111,18 +116,8 @@ export default defineComponent({
         color: '',
         age: null,
         size: '',
-        file: undefined,
+        files: [],
       }
-    }
-  },
-  setup() {
-    const onUpload = (files) => {
-      this.form.file.push(files);
-      console.log(file);
-    }
-
-    return {
-      onUpload,
     }
   },
 })
