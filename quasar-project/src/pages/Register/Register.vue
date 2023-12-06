@@ -1,12 +1,6 @@
 <template>
   <div class="area">
-    <div v-if="loading" class="loading" style="justify-content: center">
-      <q-spinner-facebook color="blue-10" style="justify-content: center" size="10em"></q-spinner-facebook>
-    </div>
-    <div>
-
-    </div>
-    <div v-if="!loading" class="image-area">
+    <div class="image-area">
       <!-- <q-file multiple="" borderless v-model="form.file" color="blue-10" accept="image/" :rules="[
         val => val != null || 'Imagem obrigatória',
       ]">
@@ -91,6 +85,7 @@ export default defineComponent({
         size: '',
         files: [],
       },
+      loading: false,
       sizeOptions: [
         { label: 'Pequeno', value: 'pequeno' },
         { label: 'Médio', value: 'médio' },

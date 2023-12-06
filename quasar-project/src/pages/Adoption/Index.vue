@@ -5,22 +5,23 @@
   <div v-else>
     <div class="title-area">
       <div class="filter-area">
-        <q-select filled v-model="modelSelectAge" :options="optionsSelectAge" label="Idade" emit-value map-options
-          clearable class="select" color="blue-10" @update:modelValue="onFilterAge" @clear="onClearFilterAge">
-          <template v-slot:option="{ itemProps, opt, selected, toggleOption }">
-            <q-item v-bind="itemProps">
-              <q-item-section>
-                <!-- eslint-disable -->
-                <q-item-label v-html="opt.label"></q-item-label>
-                <!--eslint-enable-->
-              </q-item-section>
-              <q-item-section side>
-                <q-checkbox :model-value="selected" @update:model-value="toggleOption(opt)"></q-checkbox>
-              </q-item-section>
-            </q-item>
-          </template>
-        </q-select>
-
+        <q-input filled v-model="modelSelectAge" label="Idade" @blur="onFilterAge" class="q-ml-md q-mr-md">
+        </q-input>
+<!--        <q-select filled v-model="modelSelectAge" :options="optionsSelectAge" label="Idade" emit-value map-options-->
+<!--          clearable class="select" color="blue-10" @update:modelValue="onFilterAge" @clear="onClearFilterAge">-->
+<!--          <template v-slot:option="{ itemProps, opt, selected, toggleOption }">-->
+<!--            <q-item v-bind="itemProps">-->
+<!--              <q-item-section>-->
+<!--                &lt;!&ndash; eslint-disable &ndash;&gt;-->
+<!--                <q-item-label v-html="opt.label"></q-item-label>-->
+<!--                &lt;!&ndash;eslint-enable&ndash;&gt;-->
+<!--              </q-item-section>-->
+<!--              <q-item-section side>-->
+<!--                <q-checkbox :model-value="selected" @update:model-value="toggleOption(opt)"></q-checkbox>-->
+<!--              </q-item-section>-->
+<!--            </q-item>-->
+<!--          </template>-->
+<!--        </q-select>-->
         <q-select filled v-model="modelSelectSize" :options="optionsSelectSize" label="Porte/Tamanho" emit-value
           map-options clearable class="select" color="blue-10" @update:modelValue="onFilterSize"
           @clear="onClearFilterSize">
@@ -38,21 +39,23 @@
           </template>
         </q-select>
 
-        <q-select filled v-model="modelSelectColor" :options="optionsSelectColor" label="Cor" emit-value map-options
-          clearable class="select" color="blue-10" @update:modelValue="onFilterColor" @clear="onClearFilterColor">
-          <template v-slot:option="{ itemProps, opt, selected, toggleOption }">
-            <q-item v-bind="itemProps">
-              <q-item-section>
-                <!-- eslint-disable -->
-                <q-item-label v-html="opt.label"></q-item-label>
-                <!--eslint-enable-->
-              </q-item-section>
-              <q-item-section side>
-                <q-checkbox :model-value="selected" @update:model-value="toggleOption(opt)"></q-checkbox>
-              </q-item-section>
-            </q-item>
-          </template>
-        </q-select>
+        <q-input filled v-model="modelSelectColor" label="Cor" @blur="onFilterAge" class="q-ml-md q-mr-md">
+        </q-input>
+<!--        <q-select filled v-model="modelSelectColor" :options="optionsSelectColor" label="Cor" emit-value map-options-->
+<!--          clearable class="select" color="blue-10" @update:modelValue="onFilterColor" @clear="onClearFilterColor">-->
+<!--          <template v-slot:option="{ itemProps, opt, selected, toggleOption }">-->
+<!--            <q-item v-bind="itemProps">-->
+<!--              <q-item-section>-->
+<!--                &lt;!&ndash; eslint-disable &ndash;&gt;-->
+<!--                <q-item-label v-html="opt.label"></q-item-label>-->
+<!--                &lt;!&ndash;eslint-enable&ndash;&gt;-->
+<!--              </q-item-section>-->
+<!--              <q-item-section side>-->
+<!--                <q-checkbox :model-value="selected" @update:model-value="toggleOption(opt)"></q-checkbox>-->
+<!--              </q-item-section>-->
+<!--            </q-item>-->
+<!--          </template>-->
+<!--        </q-select>-->
       </div>
     </div>
     <div class="body-area">
