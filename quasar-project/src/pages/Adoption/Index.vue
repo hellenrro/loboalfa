@@ -11,7 +11,7 @@
             <q-item v-bind="itemProps">
               <q-item-section>
                 <!-- eslint-disable -->
-                <q-item-label v-html="opt.label"></q-item-label>
+                <q-item-label v-html="`${opt.label} anos`"></q-item-label>
                 <!--eslint-enable-->
               </q-item-section>
               <q-item-section side>
@@ -99,21 +99,7 @@ export default defineComponent({
       const response = await axios.get('http://localhost:8989/list');
       loading.value = false;
       data.value = response.data.data;
-      // data.value = [{'name':'teste','color':'preto','size':'pequeno','age':12,'description':'companheiro e brincalh\u00e3o','id':19,'img':[]},{'name':'teste','color':'preto','size':'pequeno','age':12,'description':'companheiro e brincalh\u00e3o','id':20,'img':[]},{'name':'teste','color':'preto','size':'pequeno','age':12,'description':'companheiro e brincalh\u00e3o','id':21,'img':[]},{'name':'teste','color':'preto','size':'pequeno','age':12,'description':'companheiro e brincalh\u00e3o','id':22,'img':[]},{'name':'teste','color':'preto','size':'pequeno','age':12,'description':'companheiro e brincalh\u00e3o','id':23,'img':['1701610734_shepherd-dog-puppy-png-0000060668-800.jpeg','1701610735_Cachorro-com-frio-3.webp']},{'name':'teste','color':'preto','size':'pequeno','age':12,'description':'companheiro e brincalh\u00e3o','id':24,'img':['1701610840.jpeg','1701610840.webp']}]
-
-      optionsSelectAge = _.uniqWith(data.value.map((item) => {
-        return {
-          label: `${item.age}`,
-          value: item.age
-        }
-      }), _.isEqual);
-
-      optionsSelectColor = _.uniqWith(data.value.map((item) => {
-        return {
-          label: `${item.color}`,
-          value: item.color
-        }
-      }), _.isEqual);
+      // data.value = [{ 'name': 'teste', 'color': 'preto', 'size': 'pequeno', 'age': 12, 'description': 'companheiro e brincalh\u00e3o', 'id': 19, 'img': [] }, { 'name': 'teste', 'color': 'preto', 'size': 'pequeno', 'age': 12, 'description': 'companheiro e brincalh\u00e3o', 'id': 20, 'img': [] }, { 'name': 'teste', 'color': 'preto', 'size': 'pequeno', 'age': 12, 'description': 'companheiro e brincalh\u00e3o', 'id': 21, 'img': [] }, { 'name': 'teste', 'color': 'preto', 'size': 'pequeno', 'age': 12, 'description': 'companheiro e brincalh\u00e3o', 'id': 22, 'img': [] }, { 'name': 'teste', 'color': 'preto', 'size': 'pequeno', 'age': 12, 'description': 'companheiro e brincalh\u00e3o', 'id': 23, 'img': ['1701610734_shepherd-dog-puppy-png-0000060668-800.jpeg', '1701610735_Cachorro-com-frio-3.webp'] }, { 'name': 'teste', 'color': 'preto', 'size': 'pequeno', 'age': 12, 'description': 'companheiro e brincalh\u00e3o', 'id': 24, 'img': ['1701610840.jpeg', '1701610840.webp'] }]
     };
 
     getData();
@@ -175,6 +161,72 @@ export default defineComponent({
         data.value = response.data.data;
       });
     };
+
+    optionsSelectAge = [
+      {
+        label: '1',
+        value: '1'
+      },
+      {
+        label: '2',
+        value: '2'
+      },
+      {
+        label: '3',
+        value: '3'
+      },
+      {
+        label: '4',
+        value: '4'
+      },
+      {
+        label: '5',
+        value: '5'
+      },
+      {
+        label: '6',
+        value: '6'
+      },
+      {
+        label: '7',
+        value: '7'
+      },
+      {
+        label: '8',
+        value: '8'
+      },
+      {
+        label: '9',
+        value: '9'
+      },
+      {
+        label: '10',
+        value: '10'
+      },
+      {
+        label: '11',
+        value: '11'
+      },
+      {
+        label: '12',
+        value: '12'
+      },
+    ];
+
+    optionsSelectColor = [
+      {
+        label: 'Branco',
+        value: 'Branco'
+      },
+      {
+        label: 'Preto',
+        value: 'Preto'
+      },
+      {
+        label: 'Misto',
+        value: 'Misto'
+      },
+    ];
 
     const optionsSelectSize = [
       {
