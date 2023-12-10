@@ -54,7 +54,7 @@ class AnimalController extends Controller {
 
     public function store(Request $request)
     {
-        if (Auth::check()) {
+//        if (Auth::check()) {
             $request->validate([
                 'name' => 'required|string',
                 'description' => 'required|string'
@@ -74,16 +74,15 @@ class AnimalController extends Controller {
                     $imageName = time() . '.' . $image->getClientOriginalExtension();
                     $image->storeAs('pets', $imageName, 'public');
                     $imgPet = new ImagePet();
-                    dump($imgPet);
                     $imgPet->id_pet = $newPet->id;
                     $imgPet->name = $imageName;
                     $imgPet->save();
                 }
             }
             return ['message' => 'Pet criado com sucesso', 'success' => true];
-        } else {
-            return response()->json(['message' => 'Sem permissão'], 200);
-        }
+//        } else {
+//            return response()->json(['message' => 'Sem permissão'], 200);
+//        }
     }
 
     public function edit(Request $request, $id)

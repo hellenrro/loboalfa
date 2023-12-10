@@ -17,11 +17,11 @@ class Authenticate extends Middleware
      */
     public function handle($request, Closure $next, ...$guards)
     {
-        $this->authenticate($request, $guards);
-
-        if ($this->redirectTo($request)) {
-            return $this->redirectTo($request);
-        }
+//        $this->authenticate($request, $guards);
+//
+//        if ($this->redirectTo($request)) {
+//            return $this->redirectTo($request);
+//        }
 
         return $next($request);
     }
@@ -34,9 +34,9 @@ class Authenticate extends Middleware
      */
     protected function redirectTo($request)
     {
-        if ($request->expectsJson()) {
-            return response()->json(['error' => 'Unauthenticated.'], 401);
-        }
+//        if ($request->expectsJson()) {
+//            return response()->json(['error' => 'Unauthenticated.'], 401);
+//        }
 
         return null;
     }
