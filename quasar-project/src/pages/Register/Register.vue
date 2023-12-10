@@ -17,6 +17,12 @@
           class="input-file"
           accept="image/"
           @added="(file) => {
+    <div v-if="!loading" class="image-area">
+      <q-uploader
+        multiple
+        class="input-file"
+        accept="image/"
+        @added="(file) => {
           form.files.push(file[0]);
         }"
           @removed="(file) => {
