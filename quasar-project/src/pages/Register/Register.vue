@@ -12,12 +12,6 @@
             <q-icon name="attach_file" />
           </div>
         </q-file> -->
-        <q-uploader
-          multiple
-          class="input-file"
-          accept="image/"
-          @added="(file) => {
-    <div v-if="!loading" class="image-area">
       <q-uploader
         multiple
         class="input-file"

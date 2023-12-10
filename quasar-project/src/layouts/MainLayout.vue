@@ -7,7 +7,7 @@
       <q-img src="../statics/logo.png" width="200px"/>
     </div>
     <div class="menu">
-      <div class="a-area"><a class="a" href="#">Home</a></div>
+      <div class="a-area"><router-link class="a" :to="{ name: 'institutional.index' }">Institucional</router-link></div>
       <div class="a-area"><router-link class="a" :to="{ name: 'pets.index' }">Animais</router-link></div>
       <div class="a-area"><a class="a" href="#">Contato</a></div>
     </div>
@@ -19,7 +19,7 @@
 
     <q-footer class="footer">
       <q-toolbar>
-        <q-toolbar-title>O Lobo Alfa</q-toolbar-title>
+        <q-toolbar-title>O Lobo Alfa 2023</q-toolbar-title>
       </q-toolbar>
     </q-footer>
   </q-layout>

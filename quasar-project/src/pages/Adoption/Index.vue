@@ -5,23 +5,9 @@
   <div v-else>
     <div class="title-area">
       <div class="filter-area">
-        <q-input filled v-model="modelSelectAge" label="Idade" @blur="onFilterAge" class="q-ml-md q-mr-md">
+        <q-input class="select" filled v-model="modelSelectAge" label="Idade" @blur="onFilterAge">
         </q-input>
-<!--        <q-select filled v-model="modelSelectAge" :options="optionsSelectAge" label="Idade" emit-value map-options-->
-<!--          clearable class="select" color="blue-10" @update:modelValue="onFilterAge" @clear="onClearFilterAge">-->
-<!--          <template v-slot:option="{ itemProps, opt, selected, toggleOption }">-->
-<!--            <q-item v-bind="itemProps">-->
-<!--              <q-item-section>-->
-<!--                &lt;!&ndash; eslint-disable &ndash;&gt;-->
-<!--                <q-item-label v-html="opt.label"></q-item-label>-->
-<!--                &lt;!&ndash;eslint-enable&ndash;&gt;-->
-<!--              </q-item-section>-->
-<!--              <q-item-section side>-->
-<!--                <q-checkbox :model-value="selected" @update:model-value="toggleOption(opt)"></q-checkbox>-->
-<!--              </q-item-section>-->
-<!--            </q-item>-->
-<!--          </template>-->
-<!--        </q-select>-->
+
         <q-select filled v-model="modelSelectSize" :options="optionsSelectSize" label="Porte/Tamanho" emit-value
           map-options clearable class="select" color="blue-10" @update:modelValue="onFilterSize"
           @clear="onClearFilterSize">
@@ -39,23 +25,8 @@
           </template>
         </q-select>
 
-        <q-input filled v-model="modelSelectColor" label="Cor" @blur="onFilterAge" class="q-ml-md q-mr-md">
+        <q-input class="select" filled v-model="modelSelectColor" label="Cor" @blur="onFilterAge">
         </q-input>
-<!--        <q-select filled v-model="modelSelectColor" :options="optionsSelectColor" label="Cor" emit-value map-options-->
-<!--          clearable class="select" color="blue-10" @update:modelValue="onFilterColor" @clear="onClearFilterColor">-->
-<!--          <template v-slot:option="{ itemProps, opt, selected, toggleOption }">-->
-<!--            <q-item v-bind="itemProps">-->
-<!--              <q-item-section>-->
-<!--                &lt;!&ndash; eslint-disable &ndash;&gt;-->
-<!--                <q-item-label v-html="opt.label"></q-item-label>-->
-<!--                &lt;!&ndash;eslint-enable&ndash;&gt;-->
-<!--              </q-item-section>-->
-<!--              <q-item-section side>-->
-<!--                <q-checkbox :model-value="selected" @update:model-value="toggleOption(opt)"></q-checkbox>-->
-<!--              </q-item-section>-->
-<!--            </q-item>-->
-<!--          </template>-->
-<!--        </q-select>-->
       </div>
     </div>
     <div class="body-area">
@@ -70,7 +41,6 @@
 <script lang="ts">
 import CardGenericList from 'components/CardGenericList.vue';
 import { Ref, defineComponent, ref } from 'vue';
-import _ from 'lodash';
 import axios from 'axios';
 
 export default defineComponent({
@@ -87,46 +57,26 @@ export default defineComponent({
       img: string[],
     }
 
-    interface Ioptions {
-      label: string,
-      value: string,
-    }
     const data: Ref<Idata[]> = ref([]);
     const loading = ref(false);
 
-    let optionsSelectAge: Ioptions[] = [];
-    let optionsSelectColor: Ioptions[] = [];
-
     const getData = async () => {
       loading.value = true;
-      const response = await axios.get('http://localhost:8989/list');
+      //const response = await axios.get('http://localhost:8989/list');
       loading.value = false;
-      data.value = response.data.data;
-      // data.value = [{'name':'teste','color':'preto','size':'pequeno','age':12,'description':'companheiro e brincalh\u00e3o','id':19,'img':[]},{'name':'teste','color':'preto','size':'pequeno','age':12,'description':'companheiro e brincalh\u00e3o','id':20,'img':[]},{'name':'teste','color':'preto','size':'pequeno','age':12,'description':'companheiro e brincalh\u00e3o','id':21,'img':[]},{'name':'teste','color':'preto','size':'pequeno','age':12,'description':'companheiro e brincalh\u00e3o','id':22,'img':[]},{'name':'teste','color':'preto','size':'pequeno','age':12,'description':'companheiro e brincalh\u00e3o','id':23,'img':['1701610734_shepherd-dog-puppy-png-0000060668-800.jpeg','1701610735_Cachorro-com-frio-3.webp']},{'name':'teste','color':'preto','size':'pequeno','age':12,'description':'companheiro e brincalh\u00e3o','id':24,'img':['1701610840.jpeg','1701610840.webp']}]
-
-      optionsSelectAge = _.uniqWith(data.value.map((item) => {
-        return {
-          label: `${item.age}`,
-          value: item.age
-        }
-      }), _.isEqual);
-
-      optionsSelectColor = _.uniqWith(data.value.map((item) => {
-        return {
-          label: `${item.color}`,
-          value: item.color
-        }
-      }), _.isEqual);
+      //data.value = response.data.data;
+      data.value = [{'name':'teste','color':'preto','size':'pequeno','age':12,'description':'companheiro e brincalh\u00e3o','id':19,'img':[]},{'name':'teste','color':'preto','size':'pequeno','age':12,'description':'companheiro e brincalh\u00e3o','id':20,'img':[]},{'name':'teste','color':'preto','size':'pequeno','age':12,'description':'companheiro e brincalh\u00e3o','id':21,'img':[]},{'name':'teste','color':'preto','size':'pequeno','age':12,'description':'companheiro e brincalh\u00e3o','id':22,'img':[]},{'name':'teste','color':'preto','size':'pequeno','age':12,'description':'companheiro e brincalh\u00e3o','id':23,'img':['1701610734_shepherd-dog-puppy-png-0000060668-800.jpeg','1701610735_Cachorro-com-frio-3.webp']},{'name':'teste','color':'preto','size':'pequeno','age':12,'description':'companheiro e brincalh\u00e3o','id':24,'img':['1701610840.jpeg','1701610840.webp']}]
     };
 
     getData();
 
-    const modelSelectAge = ref([]);
+    const modelSelectAge: Ref<string | number | null | undefined> = ref('');
     const modelSelectSize = ref([]);
-    const modelSelectColor = ref([]);
+    const modelSelectColor: Ref<string | number | null | undefined> = ref('');
 
     const onFilterAge = () => {
-      if (modelSelectAge.value !== null) {
+      console.log(modelSelectAge.value);
+      if (modelSelectAge.value !== '') {
         loading.value = true;
         axios.get(`http://localhost:8989/list?age=${modelSelectAge.value}${modelSelectSize.value !== null ? `&size=${modelSelectSize.value}` : ''}${modelSelectColor.value !== null ? `&color=${modelSelectColor.value}` : ''}`).then(response => {
           loading.value = false;
@@ -146,7 +96,7 @@ export default defineComponent({
     };
 
     const onFilterColor = () => {
-      if (modelSelectColor.value !== null) {
+      if (modelSelectColor.value !== '') {
         loading.value = true;
         axios.get(`http://localhost:8989/list?color=${modelSelectColor.value}${modelSelectSize.value !== null ? `&size=${modelSelectSize.value}` : ''}${modelSelectAge.value !== null ? `&age=${modelSelectAge.value}` : ''}`).then(response => {
           loading.value = false;
@@ -206,9 +156,7 @@ export default defineComponent({
       onClearFilterAge,
       onClearFilterSize,
       onClearFilterColor,
-      optionsSelectAge,
       optionsSelectSize,
-      optionsSelectColor,
     };
   }
 });
