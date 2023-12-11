@@ -123,6 +123,8 @@ export default defineComponent({
         img: this.form.files.map((item) => item),
       }).then(() => {
         this.loading = false;
+      }).catch(() => {
+        this.loading = false;
       });
     },
   },
