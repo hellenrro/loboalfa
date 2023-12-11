@@ -54,7 +54,6 @@
 
 <script>
 import { defineComponent } from 'vue';
-import axios from 'axios';
 
 export default defineComponent({
   name: 'RegisterPage',
@@ -71,18 +70,7 @@ export default defineComponent({
   },
   methods: {
     onSubmit() {
-      this.loading = true;
-      //axios.post('http://localhost:8989/create', {
-        //name: this.form.name,
-        //description: this.form.description,
-        //color: this.form.color,
-        //age: this.form.age,
-        //size: this.form.size,
-        //img: this.form.files.map((item) => item),
-      //}).then(() => {
-        this.loading = false;
-        this.onReset()
-      //});
+      this.onReset()
     },
     async onReset() {
       await this.resetForm()
