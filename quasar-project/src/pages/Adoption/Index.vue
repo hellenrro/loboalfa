@@ -62,10 +62,9 @@ export default defineComponent({
 
     const getData = async () => {
       loading.value = true;
-      //const response = await axios.get('http://localhost:8989/list');
+      const response = await axios.get('http://localhost:8989/list');
       loading.value = false;
-      //data.value = response.data.data;
-      data.value = [{'name':'teste','color':'preto','size':'pequeno','age':12,'description':'companheiro e brincalh\u00e3o','id':19,'img':[]},{'name':'teste','color':'preto','size':'pequeno','age':12,'description':'companheiro e brincalh\u00e3o','id':20,'img':[]},{'name':'teste','color':'preto','size':'pequeno','age':12,'description':'companheiro e brincalh\u00e3o','id':21,'img':[]},{'name':'teste','color':'preto','size':'pequeno','age':12,'description':'companheiro e brincalh\u00e3o','id':22,'img':[]},{'name':'teste','color':'preto','size':'pequeno','age':12,'description':'companheiro e brincalh\u00e3o','id':23,'img':['1701610734_shepherd-dog-puppy-png-0000060668-800.jpeg','1701610735_Cachorro-com-frio-3.webp']},{'name':'teste','color':'preto','size':'pequeno','age':12,'description':'companheiro e brincalh\u00e3o','id':24,'img':['1701610840.jpeg','1701610840.webp']}]
+      data.value = response.data.data;
     };
 
     getData();

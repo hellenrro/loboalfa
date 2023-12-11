@@ -6,11 +6,11 @@
 <!--      // ../statics/logo.png-->
       <q-img src="../statics/logo.png" width="200px"/>
     </div>
-    <div class="menu q-mt-sm">
-      <a class="a" href="#">Home</a>
-      <router-link class="a" :to="{ name: 'pets.index' }">Animais</router-link>
-      <a class="a" href="#">Contato</a>
-      <router-link  class="a" :to="{ name: 'register.index' }">Cadastro</router-link>
+    <div class="menu">
+      <div class="a-area"><router-link class="a" :to="{ name: 'institutional.index' }">Institucional</router-link></div>
+      <div class="a-area"><router-link class="a" :to="{ name: 'pets.index' }">Animais</router-link></div>
+      <div class="a-area"><router-link class="a" :to="{ name: 'contact.index' }">Contato</router-link></div>
+      <div class="a-area"><router-link class="a" :to="{ name: 'register.index' }">Cadastro</router-link></div>
     </div>
 
     <!-- Se desejar centralizar a imagem verticalmente, você pode usar flexbox na div .centered-image -->
@@ -20,21 +20,13 @@
 
     <q-footer class="footer">
       <q-toolbar>
-        <q-toolbar-title>O Lobo Alfa</q-toolbar-title>
+        <q-toolbar-title>O Lobo Alfa 2023</q-toolbar-title>
       </q-toolbar>
     </q-footer>
   </q-layout>
 </template>
 
-<script>
-</script>
-
 <style scoped>
-.layout {
-  height: inherit;
-  width: inherit;
-}
-
 .centered-image {
   display: flex;
   justify-content: center;
@@ -46,18 +38,23 @@
   background-color: #00008b;
   border-top: 0.375em solid #ffa500;
   border-bottom: 0.375em solid #ffa500;
-  text-align: center;
-  padding: 1.25em;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  height: 4.5em;
 }
 
+.a-area {
+  display: flex;
+  align-items: center;
+  height: 85%;
+}
 .a {
-  height: 100%;
   color: white;
   text-decoration: none;
-  margin: 0em 3.75em;
   font-size: 1.125em;
   font-weight: bold;
-  display: inline-block;
+  margin: 0 0.75em;
 }
 
 .footer {
