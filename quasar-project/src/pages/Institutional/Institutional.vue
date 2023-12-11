@@ -221,7 +221,7 @@ export default defineComponent({
   flex-direction: row;
   align-items: center;
   justify-content: start;
-  margin-left: 6.25em;
+  margin-left: 5.25em;
   padding: 1.25em 0;
 }
 

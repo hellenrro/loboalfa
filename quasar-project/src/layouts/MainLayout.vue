@@ -9,7 +9,7 @@
     <div class="menu">
       <div class="a-area"><router-link class="a" :to="{ name: 'institutional.index' }">Institucional</router-link></div>
       <div class="a-area"><router-link class="a" :to="{ name: 'pets.index' }">Animais</router-link></div>
-      <div class="a-area"><a class="a" href="#">Contato</a></div>
+      <div class="a-area"><router-link class="a" :to="{ name: 'contact.index' }">Contato</router-link></div>
     </div>
 
     <!-- Se desejar centralizar a imagem verticalmente, você pode usar flexbox na div .centered-image -->

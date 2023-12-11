@@ -37,7 +37,7 @@
           </template>
         </q-uploader>
       </div>
-      <div  v-if="!loading" class="form-area">
+      <div v-if="!loading" class="form-area">
         <q-form class="input" @submit="onSubmit" @reset="onReset" ref="myForm">
           <q-input class="input" outlined v-model="form.name" color="blue-10" placeholder="Digite o nome" hint="Nome"
                    :rules="[
@@ -146,6 +146,7 @@ export default defineComponent({
 
 .form-area {
   width: 50%;
+  height: 40em;
   margin-left: 6.25em;
   margin-right: 6.25em;
 }
