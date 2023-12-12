@@ -31,8 +31,8 @@
     </div>
     <div class="body-area">
       <div class="cards-area" style="margin-right: 2.45rem">
-        <CardGenericList v-for="(item, index) in data" :key="index" :name="item.name" :color="item.color"
-          :size="item.size" :age="item.age" :description="item.description" :id="item.id" :images-src="''" />
+        <CardGenericList v-for="item in data" :key="item.id" :name="item.name" :color="item.color"
+          :size="item.size" :age="item.age" :description="item.description" :id="item.id" :images-src="item.img" />
       </div>
     </div>
   </div>
@@ -42,6 +42,7 @@
 import CardGenericList from 'components/CardGenericList.vue';
 import { Ref, defineComponent, ref } from 'vue';
 import axios from 'axios';
+import { Notify } from 'quasar';
 
 export default defineComponent({
   components: { CardGenericList },
@@ -61,10 +62,19 @@ export default defineComponent({
     const loading = ref(false);
 
     const getData = async () => {
-      loading.value = true;
-      const response = await axios.get('http://localhost:8989/list');
-      loading.value = false;
-      data.value = response.data.data;
+      try {
+        loading.value = true;
+        const response = await axios.get('http://localhost:8989/list');
+        data.value = response.data.data;
+        loading.value = false;
+      } catch(e) {
+        loading.value = false;
+        Notify.create({
+          type: 'negative',
+          message: 'Ops, não foi possível obter os dados dos animais',
+          position: 'top',
+        });
+      }
     };
 
     getData();

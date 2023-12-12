@@ -2,10 +2,8 @@
   <div class="card-generic">
     <div>
       <q-carousel swipeable animated v-model="slide" ref="carousel" infinite height="8.125em">
-        <q-carousel-slide :name="1"
-          img-src="https://adimax.com.br/wp-content/uploads/2022/05/cuidados-filhote-de-cachorro.jpg" />
-        <q-carousel-slide :name="2"
-          img-src="https://veterinario.pt/wp-content/uploads/2015/09/cat-pet-animal-domestic-gato800.jpg" />
+        <q-carousel-slide v-for="item, index in imagesSrc" :key="item.id" :name="index"
+          :img-src="`http://localhost:8989/storage/pets/${item}`" />
       </q-carousel>
     </div>
     <div class="name">

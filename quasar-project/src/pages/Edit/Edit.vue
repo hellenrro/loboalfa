@@ -1,16 +1,18 @@
 <template>
   <div>
-    <div v-if="loading" class="loading "
+    <div v-if="loading" class="loading"
       style="display: flex;justify-content: center; align-content: center; align-items: center">
       <q-spinner-facebook color="blue-10" style="justify-content: center; align-content: center; align-items: center"
         size="10em"></q-spinner-facebook>
     </div>
-    <div v-if="!loading" class="area">
-      <div v-if="!loading" class="image-area">
+    <div v-else class="area">
+      <div class="image-area">
         <q-uploader multiple class="input-file" accept="image/" v-model="form.files" @added="(file) => {
-          form.files.push(file[0]);
+          form.files.push({
+            file: file[0],
+          });
         }" @removed="(file) => {
-          form.files = form.files.filter((item) => item.__key !== file[0].__key);
+          form.files = form.files.filter((item) => item.file.__key !== file[0].__key);
         }">
           <template v-slot:header="scope">
             <div class="row no-wrap items-center q-pa-sm q-gutter-xs title-uploader">
@@ -26,22 +28,22 @@
           </template>
         </q-uploader>
         <div class="imags-area">
-          <div v-for="item in nameImgs.imgs" :key="item.id">
-            <q-img src="../../statics/cachorro.webp" no-native-menu class="imgs">
+          <div v-for="item, index in nameImgs" :key="index">
+            <q-img :src="item.img" no-native-menu class="imgs">
               <q-icon :onclick="() => {
-                console.log(item);
-                  // form.files = form.files.filter((item) => item.name !== item);
+                  form.files = form.files.filter((item) => item.id !== index);
+                  nameImgs = nameImgs.filter((item) => item.id !== index);
                 }" class="absolute all-pointer-events" size="25px" name="close" color="white" style="top: 8px; right: 8px; cursor: pointer;">
-                <q-tooltip>
-                  Tooltip
+                <q-tooltip class="tooltip">
+                  Remover imagem do animal
                 </q-tooltip>
               </q-icon>
             </q-img>
           </div>
         </div>
       </div>
-      <div v-if="!loading" class="form-area">
-        <q-form class="input" @submit="onSubmit" @reset="onReset" ref="myForm">
+      <div class="form-area">
+        <q-form class="input" @submit="onSubmit" ref="myForm">
           <q-input class="input" outlined v-model="form.name" color="blue-10" placeholder="Digite o nome" hint="Nome"
             :rules="[
               val => val && val.length > 0 || 'Nome obrigatório'
@@ -80,6 +82,7 @@
 <script>
 import { defineComponent, ref } from 'vue';
 import axios from 'axios';
+import { Notify } from 'quasar';
 
 export default defineComponent({
   name: 'EditPage',
@@ -87,30 +90,47 @@ export default defineComponent({
     const data = ref();
     const loading = ref(false);
     const getData = async () => {
-      loading.value = true;
-      //const response = await axios.get('http://localhost:8989/list');
-      loading.value = false;
-      //data.value = response.data.data.find((item) => item.id === +this.$route.params.id);
-      data.value = { 'name': 'teste', 'color': 'preto', 'size': 'pequeno', 'age': 12, 'description': 'companheiro e brincalh\u00e3o', 'id': 24, 'img': ['https://adimax.com.br/wp-content/uploads/2022/05/cuidados-filhote-de-cachorro.jpg', 'https://veterinario.pt/wp-content/uploads/2015/09/cat-pet-animal-domestic-gato800.jpg']}
+      try {
+        loading.value = true;
+        const response = await axios.get('http://localhost:8989/list');
+        data.value = response.data.data.find((item) => item.id === +this.$route.params.id);
+        loading.value = false;
+      } catch(e) {
+        loading.value = false;
+        Notify.create({
+          type: 'negative',
+          message: 'Ops, não foi possível obter os dados do animal',
+          position: 'top',
+        });
+      }
     };
 
     getData();
 
-    const nameImgs = {};
-
-    nameImgs.imgs = data.value.img;
-    nameImgs.id = data.value.id;
+    const nameImgs = data.value ? data.value.img.map((item, index) => {
+      return {
+        img: `http://localhost:8989/storage/pets/${item}`,
+        id: index,
+      }
+    }) : [];
 
     return {
-      form: {
+      form: data.value ? {
         name: data.value.name,
         description: data.value.description,
         color: data.value.color,
         age: data.value.age,
         size: data.value.size,
         files: [],
+      } : {
+        name: '',
+        description: '',
+        color: '',
+        age: undefined,
+        size: undefined,
+        files: [],
       },
-      loading: false,
+      loading,
       sizeOptions: [
         { label: 'Pequeno', value: 'pequeno' },
         { label: 'Médio', value: 'médio' },
@@ -128,31 +148,54 @@ export default defineComponent({
         color: this.form.color,
         age: this.form.age,
         size: this.form.size,
-        img: this.form.files.map((item) => item),
+        img: this.form.files.map((item) => item.file),
       }).then(() => {
-        this.loading = false;
+        Notify.create({
+          type: 'positive',
+          message: 'Animal editado com sucesso',
+          position: 'top',
+        });
+        setTimeout(() => window.location.reload(), 500);
       }).catch(() => {
+        Notify.create({
+          type: 'negative',
+          message: 'Ops, um erro inesperado ocorreu',
+          position: 'top',
+        });
         this.loading = false;
       });
     },
-    async onImageEdit() {
+    async onImageEdit(img, id) {
       this.loading = true;
-      const response = await fetch('https://cdn.shopify.com/s/files/1/0234/8017/2591/products/young-man-in-bright-fashion_925x_f7029e2b-80f0-4a40-a87b-834b9a283c39.jpg?v=1572867553');
+      const response = await fetch(img);
 
       const contentType = response.headers.get('content-type');
       const blob = await response.blob();
-      const file = new File([blob], 'teste', { contentType })
-      this.form.files.push(file);
+      const file = new File([blob], img, { contentType })
+      this.form.files.push({
+        file,
+        id,
+      });
       this.loading = false;
     }
   },
   mounted() {
-    this.onImageEdit();
+    this.nameImgs?.map((item) => {
+      this.onImageEdit(item.img, item.id);
+    });
   },
 })
 </script>
 
 <style scoped>
+.loading {
+  height: 30em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+}
+
 .area {
   display: flex;
   flex-direction: row;

@@ -70,6 +70,7 @@
 <script>
 import { defineComponent } from 'vue';
 import axios from 'axios';
+import { Notify } from 'quasar';
 
 export default defineComponent({
   name: 'RegisterPage',
@@ -103,7 +104,21 @@ export default defineComponent({
         img: this.form.files.map((item) => item),
       }).then(() => {
         this.loading = false;
-        this.onReset()
+        this.onReset();
+
+        Notify.create({
+          type: 'positive',
+          message: 'Animal criado com sucesso',
+          position: 'top',
+        });
+      }).catch(() => {
+        this.loading = false;
+
+        Notify.create({
+          type: 'negative',
+          message: 'Ops, um erro inesperado ocorreu',
+          position: 'top',
+        });
       });
     },
     async onReset() {

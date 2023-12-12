@@ -9,8 +9,6 @@ import { defineComponent } from 'vue';
 
 export default defineComponent({
   name: 'IndexT',
-  props: {
-  }
 });
 </script>
 

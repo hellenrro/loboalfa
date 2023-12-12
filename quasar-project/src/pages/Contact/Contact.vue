@@ -42,7 +42,7 @@
               val => val && val.length > 0 || 'Mensagem obrigatória'
             ]" />
           <div class="col-12">
-            <q-btn label="Cadastrar" type="submit" style="background-color: #00008b; color: white;"
+            <q-btn label="Cadastrar" type="submit" @click="onSubmit" style="background-color: #00008b; color: white;"
               class="float-right" />
             <q-btn label="Resetar" type="reset" color="default" class="float-right text-grey-10 q-mr-md" />
           </div>
@@ -54,6 +54,7 @@
 
 <script>
 import { defineComponent } from 'vue';
+import { Notify } from 'quasar';
 
 export default defineComponent({
   name: 'RegisterPage',
@@ -70,11 +71,17 @@ export default defineComponent({
   },
   methods: {
     onSubmit() {
-      this.onReset()
+      if (this.form.name && this.form.email && this.form.subject && this.form.message) {
+        Notify.create({
+          type: 'positive',
+          message: 'E-mail enviado com sucesso',
+          position: 'top',
+        });
+      }
     },
     async onReset() {
-      await this.resetForm()
-      this.$refs.myForm.resetValidation()
+      await this.resetForm();
+      this.$refs.myForm.resetValidation();
     },
     async resetForm() {
       this.form = {
