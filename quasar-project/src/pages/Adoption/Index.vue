@@ -74,7 +74,6 @@ export default defineComponent({
     const modelSelectColor: Ref<string | number | null | undefined> = ref('');
 
     const onFilterAge = () => {
-      console.log(modelSelectAge.value);
       if (modelSelectAge.value !== '') {
         loading.value = true;
         axios.get(`http://localhost:8989/list?age=${modelSelectAge.value}${modelSelectSize.value !== null ? `&size=${modelSelectSize.value}` : ''}${modelSelectColor.value !== null ? `&color=${modelSelectColor.value}` : ''}`).then(response => {

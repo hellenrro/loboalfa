@@ -7,7 +7,7 @@
     </div>
     <div v-if="!loading" class="area">
       <div v-if="!loading" class="image-area">
-        <q-uploader multiple class="input-file" accept="image/" :factory="factoryFn" @added="(file) => {
+        <q-uploader multiple class="input-file" accept="image/" v-model="form.files" @added="(file) => {
           form.files.push(file[0]);
         }" @removed="(file) => {
           form.files = form.files.filter((item) => item.__key !== file[0].__key);
@@ -26,10 +26,11 @@
           </template>
         </q-uploader>
         <div class="imags-area">
-          <div v-for="(item, index) in form.files" :key="index">
+          <div v-for="item in nameImgs.imgs" :key="item.id">
             <q-img src="../../statics/cachorro.webp" no-native-menu class="imgs">
               <q-icon :onclick="() => {
-                  form.files = form.files.filter((item) => item.__key !== file[0].__key);
+                console.log(item);
+                  // form.files = form.files.filter((item) => item.name !== item);
                 }" class="absolute all-pointer-events" size="25px" name="close" color="white" style="top: 8px; right: 8px; cursor: pointer;">
                 <q-tooltip>
                   Tooltip
@@ -90,10 +91,16 @@ export default defineComponent({
       //const response = await axios.get('http://localhost:8989/list');
       loading.value = false;
       //data.value = response.data.data.find((item) => item.id === +this.$route.params.id);
-      data.value = { 'name': 'teste', 'color': 'preto', 'size': 'pequeno', 'age': 12, 'description': 'companheiro e brincalh\u00e3o', 'id': 24, 'img': ['../../statics/cachorro.webp', 'a', 'b', 'd', 'e', 'f'] }
+      data.value = { 'name': 'teste', 'color': 'preto', 'size': 'pequeno', 'age': 12, 'description': 'companheiro e brincalh\u00e3o', 'id': 24, 'img': ['https://adimax.com.br/wp-content/uploads/2022/05/cuidados-filhote-de-cachorro.jpg', 'https://veterinario.pt/wp-content/uploads/2015/09/cat-pet-animal-domestic-gato800.jpg']}
     };
 
     getData();
+
+    const nameImgs = {};
+
+    nameImgs.imgs = data.value.img;
+    nameImgs.id = data.value.id;
+
     return {
       form: {
         name: data.value.name,
@@ -101,7 +108,7 @@ export default defineComponent({
         color: data.value.color,
         age: data.value.age,
         size: data.value.size,
-        files: data.value.img,
+        files: [],
       },
       loading: false,
       sizeOptions: [
@@ -109,6 +116,7 @@ export default defineComponent({
         { label: 'Médio', value: 'médio' },
         { label: 'Grande', value: 'grande' }
       ],
+      nameImgs,
     }
   },
   methods: {
@@ -127,6 +135,19 @@ export default defineComponent({
         this.loading = false;
       });
     },
+    async onImageEdit() {
+      this.loading = true;
+      const response = await fetch('https://cdn.shopify.com/s/files/1/0234/8017/2591/products/young-man-in-bright-fashion_925x_f7029e2b-80f0-4a40-a87b-834b9a283c39.jpg?v=1572867553');
+
+      const contentType = response.headers.get('content-type');
+      const blob = await response.blob();
+      const file = new File([blob], 'teste', { contentType })
+      this.form.files.push(file);
+      this.loading = false;
+    }
+  },
+  mounted() {
+    this.onImageEdit();
   },
 })
 </script>
@@ -178,7 +199,8 @@ export default defineComponent({
   overflow: auto;
 }
 .imgs {
-  margin: 1em;
+  margin-top: 2em;
+  margin-right: 1em;
   height: 150px;
   width: 150px;
   min-width: 150px;
