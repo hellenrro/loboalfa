@@ -3,6 +3,13 @@
     <div>
       <q-carousel swipeable animated v-model="slide" ref="carousel" infinite height="8.125em">
         <q-carousel-slide v-for="item, index in imagesSrc" :key="index" :name="index" :img-src="`http://localhost:8989/storage/pets/${item}`" />
+          <template v-slot:control>
+              <q-icon :onclick="redirect" class="absolute all-pointer-events" size="25px" name="settings" color="gray" style="top: 8px; right: 8px; cursor: pointer;">
+                <q-tooltip class="tooltip">
+                  Editar animal
+                </q-tooltip>
+              </q-icon>
+          </template>
       </q-carousel>
     </div>
     <div class="name">
@@ -46,6 +53,11 @@ export default {
     description: String,
     id: Number,
     imagesSrc: Array(String),
+  },
+  methods: {
+    redirect() {
+      window.location.href= `http://localhost:9000/#/edit/${this.id}`;
+    }
   },
   setup() {
     return {

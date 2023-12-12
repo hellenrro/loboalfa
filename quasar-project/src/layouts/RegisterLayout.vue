@@ -8,7 +8,7 @@
     </div>
     <div class="menu">
       <div class="a-area"><router-link class="a" :to="{ name: 'institutional.index' }">Institucional</router-link></div>
-      <div class="a-area"><router-link class="a" :to="{ name: 'pets.index' }">Animais</router-link></div>
+      <div class="a-area"><router-link class="a" :to="{ name: 'petsIndex.index' }">Animais</router-link></div>
       <div class="a-area"><router-link class="a" :to="{ name: 'contact.index' }">Contato</router-link></div>
       <div class="a-area"><router-link class="a" :to="{ name: 'register.index' }">Cadastro</router-link></div>
     </div>

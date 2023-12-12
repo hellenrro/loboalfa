@@ -30,6 +30,13 @@ const routes: RouteRecordRaw[] = [
     ],
   },
   {
+    path: '/petsAdmin',
+    component: () => import('layouts/RegisterLayout.vue'),
+    children: [
+      { path: '/indexAdmin', component: () => import('pages/AdoptionAdmin/IndexAdmin.vue'), name: 'petsIndex.index' },
+    ],
+  },
+  {
     path: '/register',
     component: () => import('layouts/RegisterLayout.vue'),
     children: [
