@@ -199,6 +199,10 @@
         <p>
           Sejam muito bem-vindos. Qualquer ajuda é importante. Venham fazer parte de uma Grande Corrente do Bem.
         </p>
+        <br />
+        <p>
+          Clique <a href="http://oloboalfa.com.br/wp-content/uploads/2020/01/Ebook-O-Lobo-Alfa.pdf" target="_blank">aqui</a> para visualizar o nosso e-book.
+        </p>
       </h5>
       <div class="img-footer">
         <q-img src="../../assets/img-footer-quem-somos.jpg" style="height: 100%; max-width: 100%"></q-img>
@@ -236,7 +240,7 @@ export default defineComponent({
   display: flex;
   flex-direction: column;
   max-width: 100vw;
-  margin: 0 5.45em;
+  margin: 0 6.45em;
 }
 
 .img-quem-somos {
